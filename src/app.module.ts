@@ -26,6 +26,12 @@ database: process.env.DATABASE_NAME || 'graphictees',
 
     autoLoadEntities: true,
     synchronize: true,
+        ssl: true,
+    extra: {
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    }
   }), ConfigModule.forRoot({
     isGlobal: true,
   }), UsersModule,
