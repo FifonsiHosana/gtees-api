@@ -19,6 +19,7 @@ async function bootstrap() {
     SwaggerModule.setup('api', app, document);
     // app.useGlobalGuards(new RolesGuard(new Reflector()));
     app.useGlobalPipes(new ValidationPipe());
+    console.log('DB URL:', process.env.DATABASE_URL);
     await app.listen(process.env.PORT ?? 3000);
   } catch (error) {
     console.error('🔥 Nest app failed to start:', error);
