@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:14
+    container_name: graphictees_db
+    environment:
+      POSTGRES_DB: graphictees
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: donald05
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  api:
+    build: .
+    container_name: graphictees_api
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/graphictees
+      CLOUDINARY_CLOUD_NAME: your_cloud_name
+      CLOUDINARY_API_KEY: your_key
+      CLOUDINARY_API_SECRET: your_secret
+      PAYPAL_CLIENT_ID: your_id
+      PAYPAL_CLIENT_SECRET: your_secret
+      PAYPAL_API: https://api-m.sandbox.paypal.com
+      JWT_SECRET: supersecret
+      # SENDGRID_API_KEY: your_sendgrid_key
+      # SENDGRID_FROM_EMAIL: you@example.com
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    command: sh -c "npm install && npm run build && npm run start:prod"
+
+volumes:
+  pgdata:

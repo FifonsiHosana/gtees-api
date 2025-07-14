@@ -12,9 +12,10 @@ import { Variant } from 'src/products/variant.entity';
 import { Payment } from 'src/payments/payments.entity';
 import { ShippingAddress } from 'src/orders/entities/shipping-address.entity';
 import { OrderStatusHistory } from 'src/orders/entities/order-status-history.entity';
+import { Favorite } from 'src/favorites/favorite.entity';
 
 @Module({
-  imports: [ TypeOrmModule.forFeature([User,Order,OrderItem,Product,Category,ProductImage,Variant,Payment,ShippingAddress,OrderStatusHistory])],
+  imports: [ TypeOrmModule.forFeature([User,Order,OrderItem,Product,Category,ProductImage,Variant,Payment,ShippingAddress,OrderStatusHistory,Favorite])],
   providers: [UsersService],
   controllers: [UsersController],
   exports: [UsersService],

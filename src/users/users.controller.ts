@@ -55,4 +55,16 @@ export class UsersController {
     updateRole(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateUserRoleDto) {
         return this.usersService.update(id, dto);
     }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Patch('me/favorites/:productId')
+    toggleFavorite(@Req() req, @Param('productId') productId: number) {
+        return this.usersService.toggleFavorite(req.user.userId, Number(productId));
+    }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Get('me/favorites')
+    getFavorites(@Req() req) {
+        return this.usersService.getFavorites(req.user.userId);
+    }
 }
